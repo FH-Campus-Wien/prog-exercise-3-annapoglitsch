@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -208,17 +209,30 @@ public class App {
     }
 
 
-    public static void lcg() {
+    public static long[] lcg(long seed) {
+        //Quelle https://mein-javablog.de/java-arrays-for-schleife/
+        /*https://de.acervolima.com/java-programm-zur-implementierung-des-linearen-kongruenzgenerators-
+        fur-die-generierung-von-pseudo-zufallszahlen/ */
 
+        long m = (long) Math.pow(2, 31);
+        long a = 1103515245L;
+        long c = 12345L;
+        long[] Array1 = new long[10];
+
+        Array1[0] = (a * seed + c) % m;
+
+        for (int i = 1; i < Array1.length; i++) {
+            Array1[i] = (a * Array1[i-1] + c) % m;
+        }
+        return Array1;
     }
-
     public static void guessingGame(int numberToGuess) {
         Scanner scan = new Scanner(System.in);
 
-        int guess;
         int counter = 1;
         int question;
-        randomNumberBetweenOneAndHundred(1,101);
+        int guess;
+        //randomNumberBetweenOneAndHundred(1,100);
 
         for (question = 1; question <= 10; question++) {
             System.out.print("Guess number " + counter + ": ");
@@ -239,25 +253,85 @@ public class App {
         }
     }
 
-    public static void randomNumberBetweenOneAndHundred(int min, int max) {
+    public static int randomNumberBetweenOneAndHundred() {
         //Quelle: https://www.javatpoint.com/how-to-generate-random-number-in-java
+        Random rand = new Random();
+        return rand.nextInt(100)+1;
+    }
 
-        min = 1;
-        max = 100;
+    public static boolean swapArrays(int [] Array1, int [] Array2){
+        //Quelle: https://linuxhint.com/swap-arrays-in-java/
 
-        int numberToGuess = (int)(Math.random() * (max - min + 1) + min);
+    boolean array5;
+
+if (Array1.length == Array2.length) {
+    array5 = true;
+    int fill;
+    for (int i=0; i<Array1.length; i++){
+        fill = Array1[i];
+        Array1[i] = Array2[i];
+        Array2[i]=fill;
+    }
+} else {
+    array5 = false;
+}
+return array5;
+    }
+
+    public static String camelCase(String sentence) {
+    char[] symbols = new char [sentence.length()];
+    char space = 32;
+
+    symbols [0] =
+    for (int i = 1; i < symbols.length; i++){
+       if ( symbols [i-1] == space ){
+            symbols[i] =
+        }
+
+       sentence = "2";
+       return sentence;
 
     }
-    public static void swapArrays(int array1, int array2){
 
+   public static int checkDigit(int [] code){
+        //Quelle: https://www.java-forum.org/thema/array-mit-zahlen-zw-0-und-9-befuellen.156261/
+
+        int sumdiv;
+        int proof;
+        int multiply = 0;
+
+       for (int i = 0; i < code.length; i++) {
+            multiply += code[i] * (i + 2);
+       }
+       sumdiv = multiply % 11;
+        proof = 11 - sumdiv;
+
+        if (proof == 10){
+            return 0;
+        } else if (proof == 11){
+            return 5;
+        }
+       return proof;
     }
     public static void main(String[] args) {
         // test your method implementations here
         // make method calls
         // print their results
         // etc.
-       oneMonthCalendar(31,7);
-       randomNumberBetweenOneAndHundred(1,101);
-        guessingGame(100);
+      /* oneMonthCalendar(31, 7);
+        randomNumberBetweenOneAndHundred();
+        guessingGame(randomNumberBetweenOneAndHundred());
+
+         int[] Arrayx = {1, 2, 3, 4, 5};
+        int[] Arrayy = {4, 5, 6, 7, 8};
+        swapArrays(Arrayx, Arrayy);
+
+        System.out.println(lcg(0));
+
+        int infinity = 22;
+        int[] codex = new int[infinity];
+
+        int [] codeArray = {3, 9, 1, 5, 8};
+       checkDigit(codeArray);*/
     }
 }
