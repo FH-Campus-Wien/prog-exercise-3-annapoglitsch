@@ -1,6 +1,5 @@
 package at.ac.fhcampuswien;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -281,18 +280,25 @@ public class App {
 
     public static String camelCase(String sentence) {
         char[] symbols = new char[sentence.length()];
+        int i = 1;
+        int digit = (int)symbols[i];
+        int digit2 = (int)symbols[i-1];
 
         //wenn zeichen davor = lücke
-        for (int i = 1; i < symbols.length; i++){
-            if (symbols[i-1] == ) {
-                symbols[i - 1] = 127;
-                if (symbols[i] <= 122 && symbols[i] >= 97) {
-                    symbols[i] += 32;
+        for ( i = 1; i < symbols.length; i++) {
+            if (digit >= 33 && digit <= 47){
+                break;
+            }
+            if (digit2 == 32) {
+                digit2 = 127;
+                if (digit <= 122 && digit >= 97) {
+                    digit += 32;
                 }
+                symbols [i] = (char) digit;
             }
         }
 
-        /*if (symbols[0] <= (char)122 && symbols[0] >= (char)97){
+            /*if (symbols[0] <= (char)122 && symbols[0] >= (char)97){
             symbols [0] -= (char)32;
         } else if (symbols[0] <= (char)47 && symbols[0] >= (char)33 || symbols[0] <= (char)64 && symbols[0] >= (char)58 || symbols[0] <= (char)96
         && symbols[0] >= (char)91 || symbols[0] <= (char)126 && symbols[0] >= (char)123) {
@@ -312,34 +318,34 @@ public class App {
         }*/
         String s = String.valueOf(symbols);
 
-            return s;
+        return s;
     }
 
-        public static int checkDigit ( int[] code){
-            //Quelle: https://www.java-forum.org/thema/array-mit-zahlen-zw-0-und-9-befuellen.156261/
+    public static int checkDigit(int[] code) {
+        //Quelle: https://www.java-forum.org/thema/array-mit-zahlen-zw-0-und-9-befuellen.156261/
 
-            int sumdiv;
-            int proof;
-            int multiply = 0;
+        int sumdiv;
+        int proof;
+        int multiply = 0;
 
-            for (int i = 0; i < code.length; i++) {
-                multiply += code[i] * (i + 2);
-            }
-            sumdiv = multiply % 11;
-            proof = 11 - sumdiv;
-
-            if (proof == 10) {
-                return 0;
-            } else if (proof == 11) {
-                return 5;
-            }
-            return proof;
+        for (int i = 0; i < code.length; i++) {
+            multiply += code[i] * (i + 2);
         }
-        public static void main (String[]args){
-            // test your method implementations here
-            // make method calls
-            // print their results
-            // etc.
-        camelCase("Du bist doof!");
+        sumdiv = multiply % 11;
+        proof = 11 - sumdiv;
+
+        if (proof == 10) {
+            return 0;
+        } else if (proof == 11) {
+            return 5;
         }
+        return proof;
+    }
+
+    public static void main(String[] args) {
+        // test your method implementations here
+        // make method calls
+        // print their results
+        // etc.
+    }
 }
