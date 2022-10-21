@@ -222,10 +222,11 @@ public class App {
         Array1[0] = (a * seed + c) % m;
 
         for (int i = 1; i < Array1.length; i++) {
-            Array1[i] = (a * Array1[i-1] + c) % m;
+            Array1[i] = (a * Array1[i - 1] + c) % m;
         }
         return Array1;
     }
+
     public static void guessingGame(int numberToGuess) {
         Scanner scan = new Scanner(System.in);
 
@@ -244,7 +245,7 @@ public class App {
                 break;
             } else if (guess < numberToGuess && question != 10) {
                 System.out.println("The number AI picked is higher than your guess.");
-            } else if (guess > numberToGuess && question != 10){
+            } else if (guess > numberToGuess && question != 10) {
                 System.out.println("The number AI picked is lower than your guess.");
             }
             if (question == 10) {
@@ -256,82 +257,89 @@ public class App {
     public static int randomNumberBetweenOneAndHundred() {
         //Quelle: https://www.javatpoint.com/how-to-generate-random-number-in-java
         Random rand = new Random();
-        return rand.nextInt(100)+1;
+        return rand.nextInt(100) + 1;
     }
 
-    public static boolean swapArrays(int [] Array1, int [] Array2){
+    public static boolean swapArrays(int[] Array1, int[] Array2) {
         //Quelle: https://linuxhint.com/swap-arrays-in-java/
 
-    boolean array5;
+        boolean array5;
 
-if (Array1.length == Array2.length) {
-    array5 = true;
-    int fill;
-    for (int i=0; i<Array1.length; i++){
-        fill = Array1[i];
-        Array1[i] = Array2[i];
-        Array2[i]=fill;
-    }
-} else {
-    array5 = false;
-}
-return array5;
+        if (Array1.length == Array2.length) {
+            array5 = true;
+            int fill;
+            for (int i = 0; i < Array1.length; i++) {
+                fill = Array1[i];
+                Array1[i] = Array2[i];
+                Array2[i] = fill;
+            }
+        } else {
+            array5 = false;
+        }
+        return array5;
     }
 
     public static String camelCase(String sentence) {
-    char[] symbols = new char [sentence.length()];
-    char space = 32;
+        char[] symbols = new char[sentence.length()];
 
-    symbols [0] =
-    for (int i = 1; i < symbols.length; i++){
-       if ( symbols [i-1] == space ){
-            symbols[i] =
+        //wenn zeichen davor = lücke
+        for (int i = 1; i < symbols.length; i++){
+            if (symbols[i-1] == ) {
+                symbols[i - 1] = 127;
+                if (symbols[i] <= 122 && symbols[i] >= 97) {
+                    symbols[i] += 32;
+                }
+            }
         }
 
-       sentence = "2";
-       return sentence;
-
-    }
-
-   public static int checkDigit(int [] code){
-        //Quelle: https://www.java-forum.org/thema/array-mit-zahlen-zw-0-und-9-befuellen.156261/
-
-        int sumdiv;
-        int proof;
-        int multiply = 0;
-
-       for (int i = 0; i < code.length; i++) {
-            multiply += code[i] * (i + 2);
-       }
-       sumdiv = multiply % 11;
-        proof = 11 - sumdiv;
-
-        if (proof == 10){
-            return 0;
-        } else if (proof == 11){
-            return 5;
+        /*if (symbols[0] <= (char)122 && symbols[0] >= (char)97){
+            symbols [0] -= (char)32;
+        } else if (symbols[0] <= (char)47 && symbols[0] >= (char)33 || symbols[0] <= (char)64 && symbols[0] >= (char)58 || symbols[0] <= (char)96
+        && symbols[0] >= (char)91 || symbols[0] <= (char)126 && symbols[0] >= (char)123) {
+            symbols[0] -= (char)1;
         }
-       return proof;
+
+        for (int i = 1; i < symbols.length; i++) {
+            if (symbols[i - 1] == (char) 32 && symbols[i] <= (char)122 && symbols[i] >= (char)97) {
+                symbols[i] -= (char)32;
+            } else if (symbols[i-1] != (char)32 && symbols[i] <= (char)90 && symbols[i] >= (char)65) {
+                symbols[i] += (char)32;
+            }
+           if (symbols[i] <= (char)47 && symbols[i] >= (char)33 || symbols[i] <= (char)64 && symbols[i] >= (char)58 || symbols[i] <= (char)96
+                    && symbols[i] >= (char)91 || symbols[i] <= (char)126 && symbols[i] >= (char)123) {
+                symbols[i] -= (char)1;
+            }
+        }*/
+        String s = String.valueOf(symbols);
+
+            return s;
     }
-    public static void main(String[] args) {
-        // test your method implementations here
-        // make method calls
-        // print their results
-        // etc.
-      /* oneMonthCalendar(31, 7);
-        randomNumberBetweenOneAndHundred();
-        guessingGame(randomNumberBetweenOneAndHundred());
 
-         int[] Arrayx = {1, 2, 3, 4, 5};
-        int[] Arrayy = {4, 5, 6, 7, 8};
-        swapArrays(Arrayx, Arrayy);
+        public static int checkDigit ( int[] code){
+            //Quelle: https://www.java-forum.org/thema/array-mit-zahlen-zw-0-und-9-befuellen.156261/
 
-        System.out.println(lcg(0));
+            int sumdiv;
+            int proof;
+            int multiply = 0;
 
-        int infinity = 22;
-        int[] codex = new int[infinity];
+            for (int i = 0; i < code.length; i++) {
+                multiply += code[i] * (i + 2);
+            }
+            sumdiv = multiply % 11;
+            proof = 11 - sumdiv;
 
-        int [] codeArray = {3, 9, 1, 5, 8};
-       checkDigit(codeArray);*/
-    }
+            if (proof == 10) {
+                return 0;
+            } else if (proof == 11) {
+                return 5;
+            }
+            return proof;
+        }
+        public static void main (String[]args){
+            // test your method implementations here
+            // make method calls
+            // print their results
+            // etc.
+        camelCase("Du bist doof!");
+        }
 }
